@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
   enable_dns_support = var.enable_dns_support
 
   tags = {
-    Name = `lks-${var.aws_region}-vpc`
+    Name = "lks-${var.aws_region_name}-vpc"
   }
 }
 
@@ -17,7 +17,7 @@ resource "aws_subnet" "public" {
   availability_zone = var.az[count.index]
 
   tags = {
-    Name = "lks-${var.aws_region}-public-subnet-[count.index + 1]"
+    Name = "lks-${var.aws_region_name}-public-subnet-[count.index + 1]"
   }
 }
 
@@ -28,7 +28,7 @@ resource "aws_subnet" "private" {
   availability_zone = var.az[count.index]
 
   tags = {
-    Name = "lks-${var.aws_region}-private-subnet-[count.index + 1]"
+    Name = "lks-${var.aws_region_name}-private-subnet-[count.index + 1]"
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "lks-${var.aws_region}-igw"
+    Name = "lks-${var.aws_region_name}-igw"
   }
 }
 
@@ -52,7 +52,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = aws_subnet.public[0].id
 
   tags = {
-    Name = "lks-${var.aws_region}-nat"
+    Name = "lks-${var.aws_region_name}-nat"
   }
 
   depends_on = [aws_internet_gateway.igw]
@@ -70,7 +70,7 @@ resource "aws_route_table" "public" {
 
 
   tags = {
-    Name = "lks-${var.aws_region}-public-rt"
+    Name = "lks-${var.aws_region_name}-public-rt"
   }
 }
 
@@ -83,7 +83,7 @@ resource "aws_route_table" "private" {
   }
 
   tags = {public
-    Name = "lks-${var.aws_region}-private-rt"
+    Name = "lks-${var.aws_region_name}-private-rt"
   }
 }
 
