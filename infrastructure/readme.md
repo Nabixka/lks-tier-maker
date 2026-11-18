@@ -41,3 +41,17 @@ terraform destroy
 ```bash
 
 ```
+
+<h2>Services</h2>
+
+<p> Detail what services that use terraform </p>
+
+- <strong>VPC</strong>
+- <strong>EC2<strong>
+- <strong>RDS<strong>
+- <strong>SNS<strong>
+- <strong>S3<strong>
+- <strong>Lambda<strong>
+
+<h2>Attention Error</h2>
+<h4>Setting Environtment at ec2-apps/user-data.sh if the application not work (so you deploy it after ALB Oregon complete) </h4>
