@@ -45,3 +45,4 @@ variable "oregon_private_subnet_cidr" {
     type        = list(string)
     default     = ["10.20.12.10/24". "10.20.12.0/24"]
 }
+

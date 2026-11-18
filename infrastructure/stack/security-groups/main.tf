@@ -18,136 +18,136 @@ data "terraform_remote_state" "vpc" {
 locals {
 	security_group_rules = {
 		sg_lambda = {
-			ingress = {
-				http = {
+			ingress = [
+				{
 					from_port  = 80
 					to_port    = 80
 					protocol   = "tcp"
 					cidr_blocks = [data.terraform_remote_state.vpc.virginia_vpc_cidr]
 				}
-			}
-			egress = {
-				all = {
+			]
+			egress = [
+				{
 					from_port  = 0
 					to_port    = 0
 					protocol   = -1
 					cidr_blocks = ["0.0.0.0/0"]
 				}
-			}
+			]
 		}
 		sg_rds = {
-			ingress = {
-				vpc_oregon = {
+			ingress = [
+				{
 					from_port  = 5432
 					to_port    = 5432
 					protocol   = "tcp"
 					cidr_blocks = [data.terraform_remote_state.vpc.oregon_vpc_cidr]
 				}
-				lambda = {
+				{
 					from_port  = 5432
 					to_port	   = 5432
 					protocol   = "tcp"
 					security_group_id = module.sg_lambda.security_id
 				}
-			}
-			egress  = {
-				all = {
+			]
+			egress  = [
+				{
 					from_port  = 0
 					to_port    = 0
 					protocol   = -1
 					cidr_blocks = ["0.0.0.0/0"] 
 				}
-			}
+			]
 		}
 		sg_alb_virginia = {
-			ingress = {
-				http = {
+			ingress = [
+				{
 					from_port  = 80
 					to_port    = 80
 					protocol   = "tcp"
 					cidr_blocks = ["0.0.0.0/0"]
 				}
-				https = {
+				{
 					from_port  = 443
 					to_port    = 443
 					protocol   = "tcp"
 					cidr_blocks = ["0.0.0.0/0"]
 				}
-			}
-			egress = {
-				all = {
+			]
+			egress = [
+				{
 					from_port  = 0
 					to_port    = 0
 					protocol   = -1
 					cidr_blocks = ["0.0.0.0/0"] 
 				}
-			}
+			]
 		}
 		sg_ec2_virginia = {
-			ingress = {
-				http = {
+			ingress = [
+				{
 					from_port  = 80
 					to_port    = 80
 					protocol   = "tcp"
 					security_group_id = module.sg_alb_virginia.security_id
 				}
-			}
-			egress = {
-				all = {
+			]
+			egress = [
+				{
 					from_port  = 0
 					to_port    = 0
 					protocol   = -1
 					cidr_blocks = ["0.0.0.0/0"] 
 				}
-			}
+			]
 		}
 		sg_alb_oregon = {
-			ingress = {
-				http = {
+			ingress = [
+				{
 					from_port  = 80
 					to_port    = 80
 					protocol   = "tcp"
 					cidr_blocks = [data.terraform_remote_state.vpc.virginia_vpc_cidr]
 				}
-				https = {
+				{
 					from_port  = 443
 					to_port    = 443
 					protocol   = "tcp"
 					cidr_blocks = [data.terraform_remote_state.vpc.virginia_vpc_cidr]
 				}
-			}
-			egress = {
-				all = {
+			]
+			egress = [
+				{
 					from_port  = 0
 					to_port    = 0
 					protocol   = -1
 					cidr_blocks = ["0.0.0.0/0"] 
 				}
-			}
+			]
 		}
 		sg_ec2_oregon 	= {
-			ingress = {
-				express = {
+			ingress = [
+				{
 					from_port  = 3000
 					to_port    = 3000
 					protocol   = "tcp"
 					security_group_id = module.sg_alb_oregon.security_id
 				}
-				nestJs = {
+				{
 					from_port  = 5000
 					to_port    = 5000
 					protocol   = "tcp"
 					security_group_id = module.sg_alb_oregon.security_id
 				}
-			}
-			egress = {
-				all = {
+			]
+			egress = [
+				{
 					from_port  = 0
 					to_port    = 0
 					protocol   = -1
 					cidr_blocks = ["0.0.0.0/0"] 
 				}
-			}
+			]
 		}
 	}
 }
