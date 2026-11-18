@@ -44,14 +44,8 @@ terraform destroy
 
 <h2>Services</h2>
 
-<p> Detail what services that use terraform </p>
-
-- <strong>VPC</strong>
-- <strong>EC2<strong>
-- <strong>RDS<strong>
-- <strong>SNS<strong>
-- <strong>S3<strong>
-- <strong>Lambda<strong>
+<p>You must create 7 stack. Once again you can either create modules or just create stack for services that don't have modules before. Your decision may impact the score</p>
 
 <h2>Attention Error</h2>
-<h4>Setting Environtment at ec2-apps/user-data.sh if the application not work (so you deploy it after ALB Oregon complete) </h4>
+
+- Setting Environtment at ec2-apps/user-data.sh if the application not work (so you deploy it after ALB Oregon complete)
