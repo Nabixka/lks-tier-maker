@@ -49,3 +49,19 @@ terraform destroy
 <h2>Attention Error</h2>
 
 - Setting Environtment at ec2-apps/user-data.sh if the application not work (so you deploy it after ALB Oregon complete)
+
+<h2>Service Order</h2>
+<p>It's depends on you but the most important order are number 9 - 12 if you want application run properly from the first deployment of Compute. I wan't use Docker but y'all not learn it yet so yeah i must use EC2 and why not API GATEWAY For user API & Amplify for FE? well...</p>
+
+1. VPC Virginia & Oregon
+2. Peering
+3. Security Group
+4. S3
+5. SNS
+6. RDS
+7. Lambda
+8. Eventbridge
+9. EC2 Oregon 
+10. ALB Oregon
+11. EC2 Virginia
+12. ALB Virginia
